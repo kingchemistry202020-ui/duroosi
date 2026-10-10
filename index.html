@@ -326,6 +326,84 @@ body{background:linear-gradient(160deg,var(--bg-1) 0%,var(--bg-2,var(--bg-1)) 10
   74%{opacity:1;filter:blur(0) drop-shadow(0 0 20px color-mix(in srgb,var(--accent-2) 80%,transparent));transform:translateY(0) scale(1.04);animation-timing-function:ease-in-out}
   100%{opacity:0;filter:blur(9px) drop-shadow(0 0 0 transparent);transform:translateY(-8px) scale(1.07)}
 }
+
+/* ===== نص حر للحصة ===== */
+.text-pill{background:linear-gradient(135deg,color-mix(in srgb,var(--accent-1) 24%,transparent),color-mix(in srgb,var(--accent-2) 18%,transparent))!important;border-color:color-mix(in srgb,var(--accent-1) 45%,transparent)!important;color:var(--text-1)!important;white-space:normal!important;font-size:11px!important}
+/* ===== أكورديون الإعدادات ===== */
+#page-settings .section-label.acc-head{cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;justify-content:space-between;padding:13px 16px;margin:10px 0 0;border-radius:var(--field-radius);background:color-mix(in srgb,var(--text-1) 4%,transparent);border:1px solid color-mix(in srgb,var(--text-1) 8%,transparent);font-size:13px;color:var(--text-2);transition:background .2s,border-color .2s,color .2s;scroll-margin-top:12px}
+#page-settings .section-label.acc-head::after{content:"‹";font-size:22px;line-height:1;transition:transform .3s;transform:rotate(-90deg)}
+#page-settings .section-label.acc-head.open{border-color:color-mix(in srgb,var(--accent-1) 45%,transparent);background:color-mix(in srgb,var(--accent-1) 8%,transparent);color:var(--text-1)}
+#page-settings .section-label.acc-head.open::after{transform:rotate(90deg)}
+.acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.acc-body.open{grid-template-rows:1fr}
+.acc-inner{overflow:hidden;min-height:0}
+.acc-body:not(.open) .acc-inner{visibility:hidden;transition:visibility 0s .3s}
+.acc-body.open .acc-inner{padding-top:10px}
+
+/* ===== تثبيت الحركة والسكرول ===== */
+html{overflow-x:hidden;overscroll-behavior:none;touch-action:manipulation;-webkit-text-size-adjust:100%}
+body{overscroll-behavior:none;background:var(--bg-1)}
+html::before{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:linear-gradient(160deg,var(--bg-1) 0%,var(--bg-2,var(--bg-1)) 100%);transform:translateZ(0)}
+body::before,body::after{transform:translateZ(0);will-change:transform}
+.page.active{animation:pageIn .18s ease-out}
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
+.lesson,.lesson-tile{animation:none}
+.lesson.temp,.lesson-tile.temp{animation:pulse-red 1.8s ease-in-out infinite}
+.lesson.empty,.lesson-tile.empty{animation:pulse-empty 1.8s ease-in-out infinite}
+.is-scrolling .lesson,.is-scrolling .lesson-tile,.is-scrolling .lesson-cont,.is-scrolling .map-lesson,.is-scrolling .badge{animation-play-state:paused!important}
+
+.save-bar{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:20;padding:12px 0 4px;margin-top:14px;background:linear-gradient(to top,var(--bg-1) 55%,transparent)}
+
+/* ===== زرار الرئيسية العائم (نيون) ===== */
+.fab{width:56px;height:56px;border-radius:50%;font-size:0;font-weight:400;overflow:visible;
+  color:color-mix(in srgb,var(--accent-1) 35%,#fff);
+  background:radial-gradient(circle at 32% 26%,color-mix(in srgb,var(--accent-1) 30%,var(--bg-1)) 0%,var(--bg-1) 72%);
+  border:1.5px solid color-mix(in srgb,var(--accent-1) 75%,#fff);
+  box-shadow:0 0 7px var(--accent-1),0 0 18px color-mix(in srgb,var(--accent-1) 70%,transparent),inset 0 0 12px color-mix(in srgb,var(--accent-1) 35%,transparent);
+  transition:transform .2s,box-shadow .2s}
+.fab svg{pointer-events:none;filter:drop-shadow(0 0 2px var(--accent-1)) drop-shadow(0 0 7px var(--accent-1))}
+.fab::before{content:"";position:absolute;inset:-7px;border-radius:50%;pointer-events:none;box-shadow:0 0 22px 5px var(--accent-2);opacity:.4;animation:neonPulse 2.6s ease-in-out infinite}
+@keyframes neonPulse{0%,100%{opacity:.25}50%{opacity:.7}}
+.fab.open,.fab.open.dragging{transform:none}
+.fab.dragging{transform:scale(1.1);box-shadow:0 0 10px var(--accent-1),0 0 28px var(--accent-1),inset 0 0 14px color-mix(in srgb,var(--accent-1) 45%,transparent)}
+.fab:active{transform:scale(.94)}
+.add-lesson-btn{padding:7px 13px;border-radius:20px;border:1px solid color-mix(in srgb,var(--accent-1) 45%,transparent);background:color-mix(in srgb,var(--accent-1) 14%,transparent);color:var(--text-1);font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;line-height:1;touch-action:manipulation}
+.save-bar{padding-left:78px}
+
+/* ===== ثبات أعلى (بدون تغيير أي ميزة) ===== */
+*{-webkit-tap-highlight-color:transparent}
+.lesson,.lesson-tile,.lesson-cont,.map-lesson,.day-btn,.stat,.section-label,.fab,.btn,button{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select{-webkit-user-select:text;user-select:text}
+html{scroll-behavior:auto}
+body{min-height:100vh;min-height:100dvh}
+.map-scroll{max-height:calc(100vh - 280px);max-height:calc(100dvh - 280px);overscroll-behavior:contain}
+header{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transform:translateZ(0);background:linear-gradient(180deg,color-mix(in srgb,var(--bg-1) 97%,transparent) 0,color-mix(in srgb,var(--bg-1) 90%,transparent) 70%,transparent 100%)}
+.gear-btn,.day-btn,.free-slots-btn,.stat,.map-header-row,.map-corner,.map-time-col{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.is-scrolling *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+
+/* ===== ستايل Glass Bento ===== */
+html[data-style="glass"]::before{background:
+ radial-gradient(at 12% 8%,color-mix(in srgb,var(--accent-1) 40%,transparent) 0,transparent 46%),
+ radial-gradient(at 90% 10%,color-mix(in srgb,var(--accent-2) 30%,transparent) 0,transparent 44%),
+ radial-gradient(at 82% 94%,color-mix(in srgb,var(--accent-1) 28%,transparent) 0,transparent 50%),
+ radial-gradient(at 6% 90%,color-mix(in srgb,var(--accent-2) 24%,transparent) 0,transparent 46%),
+ var(--bg-1)}
+html[data-style="glass"] .card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.14)}
+html[data-style="glass"] .stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);box-shadow:0 8px 24px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.12)}
+html[data-style="glass"] .day-btn{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+html[data-style="glass"] .stats{grid-template-columns:repeat(2,1fr);gap:12px}
+html[data-style="glass"] .stat:first-child{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;text-align:right;background:linear-gradient(135deg,color-mix(in srgb,var(--accent-1) 34%,transparent),rgba(255,255,255,.06))}
+html[data-style="glass"] .stat:first-child .value{font-size:40px;line-height:1}
+html[data-style="glass"] .stat:first-child .label{font-size:14px;margin:0;color:var(--text-2)}
+html[data-style="glass"] .stat:nth-child(2){background:linear-gradient(135deg,color-mix(in srgb,var(--accent-2) 24%,transparent),rgba(255,255,255,.06))}
+html[data-style="glass"] .stat:nth-child(3){padding:18px 10px}
+html[data-style="glass"] .stat .value{font-size:26px}
+html[data-style="glass"] .card,html[data-style="glass"] .stat,html[data-style="glass"] .day-btn{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s,background .35s}
+@media (hover:hover){
+  html[data-style="glass"] .card:hover,html[data-style="glass"] .stat:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent-2) 55%,transparent);box-shadow:0 18px 44px rgba(0,0,0,.4),0 0 0 1px color-mix(in srgb,var(--accent-2) 25%,transparent),inset 0 1px 0 rgba(255,255,255,.18)}
+  html[data-style="glass"] .day-btn:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent-2) 50%,transparent)}
+}
+html[data-style="glass"] .card:active,html[data-style="glass"] .stat:active{transform:scale(.992)}
 </style>
 </head>
 <body>
@@ -344,15 +422,16 @@ body{background:linear-gradient(160deg,var(--bg-1) 0%,var(--bg-2,var(--bg-1)) 10
     <div class="row"><div class="form-group"><label>من</label><input type="time" id="inpStart" value="09:00"></div><div class="form-group"><label>إلى</label><input type="time" id="inpEnd" value="10:00"></div></div>
     <div class="form-group"><label>النوع</label><select id="inpType"><option value="offline">🏫 حضوري</option><option value="online">💻 أونلاين</option><option value="temp">⏳ مؤقتة</option><option value="empty">⬜ فارغ</option></select></div>
     <button class="btn" onclick="addLesson()"><span>✨</span> حفظ الحصة</button>
+    <button type="button" class="btn ghost" style="margin-top:8px" onclick="toggleForm()">إلغاء</button>
   </div>
-  <div class="card"><div class="card-title"><span><span class="dot"></span> جدول <span id="selectedDayName"></span></span><span class="hint-mini">👆 ضغطة طويلة</span></div><div class="timeline-list" id="lessonsList"></div></div>
+  <div class="card"><div class="card-title"><span><span class="dot"></span> جدول <span id="selectedDayName"></span></span><span style="display:flex;align-items:center;gap:8px"><button type="button" class="add-lesson-btn" onclick="toggleForm()">➕ حصة</button><span class="hint-mini">👆 ضغطة طويلة</span></span></div><div class="timeline-list" id="lessonsList"></div></div>
 </section>
 
 <section id="page-settings" class="page">
   <div class="settings-topbar"><button class="back-btn" onclick="closeSettings()">→</button><h2>⚙️ الإدارة</h2></div>
-  <div class="section-label">🎨 المظهر والألوان</div>
+  <div class="section-label">🎨 الثيمات الكلاسيكية والألوان</div>
   <div class="card">
-    <button type="button" class="theme-palette-btn" onclick="openThemePalette()"><span class="tp-dots" id="tpDots"></span><span class="tp-text">🎨 الثيمات<small>اضغط لاختيار ثيم من اللوحة</small></span><span class="tp-arrow">‹</span></button>
+    <button type="button" class="theme-palette-btn" onclick="openThemePalette('classic')"><span class="tp-dots" id="tpDots"></span><span class="tp-text">🎨 الثيمات<small>اضغط لاختيار ثيم من اللوحة</small></span><span class="tp-arrow">‹</span></button>
     <div class="row"><div class="form-group"><label>أساسي</label><button class="color-swatch-btn" id="th-a1" data-color="#6366f1" style="background:#6366f1" onclick="openColorPicker(this.dataset.color,c=>setThemeColor('th-a1',c))"></button></div><div class="form-group"><label>ثانوي</label><button class="color-swatch-btn" id="th-a2" data-color="#a855f7" style="background:#a855f7" onclick="openColorPicker(this.dataset.color,c=>setThemeColor('th-a2',c))"></button></div></div>
     <div class="row"><div class="form-group"><label>خلفية</label><button class="color-swatch-btn" id="th-bg" data-color="#0f0f1a" style="background:#0f0f1a" onclick="openColorPicker(this.dataset.color,c=>setThemeColor('th-bg',c))"></button></div><div class="form-group"><label>نص</label><button class="color-swatch-btn" id="th-text" data-color="#ffffff" style="background:#ffffff" onclick="openColorPicker(this.dataset.color,c=>setThemeColor('th-text',c))"></button></div></div>
     <div class="form-group"><label>انحناء المربعات <span class="count-badge" id="v-r">24</span></label><input type="range" id="th-r" min="0" max="40" value="24" oninput="applyTheme()"></div>
@@ -360,6 +439,10 @@ body{background:linear-gradient(160deg,var(--bg-1) 0%,var(--bg-2,var(--bg-1)) 10
     <div class="form-group"><label>قوة الزجاج <span class="count-badge" id="v-bl">20</span></label><input type="range" id="th-bl" min="0" max="40" value="20" oninput="applyTheme()"></div>
     <div class="form-group"><label>قوة الإضاءة <span class="count-badge" id="v-gl">100</span></label><input type="range" id="th-gl" min="0" max="200" value="100" oninput="applyTheme()"></div>
     <button class="btn danger" onclick="resetTheme()">↺ استرجاع الافتراضي</button>
+  </div>
+  <div class="section-label">💎 ثيمات زجاجية (Glass Bento)</div>
+  <div class="card">
+    <button type="button" class="theme-palette-btn" onclick="openThemePalette('glass')"><span class="tp-dots" id="tpDots2"></span><span class="tp-text">💎 الثيمات الزجاجية<small>زجاج شفاف وكروت Bento وخلفية شبكية ناعمة</small></span><span class="tp-arrow">‹</span></button>
   </div>
   <div class="section-label">💬 العبارة الترحيبية</div>
   <div class="card">
@@ -392,6 +475,7 @@ body{background:linear-gradient(160deg,var(--bg-1) 0%,var(--bg-2,var(--bg-1)) 10
   <div class="card" id="dayHoursCard"></div>
   <div class="section-label">🗑️ منطقة الخطر</div>
   <div class="card"><button class="btn danger" onclick="clearAll()">حذف كل الحصص</button></div>
+  <div class="save-bar"><button class="btn" onclick="saveAllSettings()"><span>💾</span> حفظ الإعدادات</button></div>
 </section>
 
 <section id="page-map" class="page">
@@ -415,7 +499,7 @@ body{background:linear-gradient(160deg,var(--bg-1) 0%,var(--bg-2,var(--bg-1)) 10
 </section>
 </main>
 
-<button class="fab" id="fab">+</button>
+<button class="fab" id="fab" aria-label="الرئيسية"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.2 12 3.5l9 7.7"/><path d="M5.5 9.8V20a1 1 0 0 0 1 1H10v-5.2a2 2 0 0 1 4 0V21h3.5a1 1 0 0 0 1-1V9.8"/></svg></button>
 <div class="sheet-overlay" id="freeSlotsOverlay" onclick="closeFreeSlots()"></div>
 <div class="sheet" id="freeSlotsSheet" onclick="event.stopPropagation()"></div>
 <div class="sheet-overlay" id="editOverlay" onclick="closeEditSheet()"></div>
@@ -500,7 +584,7 @@ function pickEmptyColor(t){
   for(let p=80;br<4&&p>=0;p-=20){const c=mixHexColors(best,t.text,p);br=_cr(c,t.bg);if(br>=4||p===0)return c}
   return best;
 }
-function applyTheme(){const t={a1:$("th-a1").dataset.color,a2:$("th-a2").dataset.color,bg:$("th-bg").dataset.color,text:$("th-text").dataset.color,r:+$("th-r").value,fr:+$("th-fr").value,bl:+$("th-bl").value,gl:+$("th-gl").value,a3:(theme&&theme.a3)||null,bg2:(theme&&theme.bg2)||null};theme=t,localStorage.setItem("theme",JSON.stringify(t));const s=document.documentElement.style;s.setProperty("--accent-1",t.a1),s.setProperty("--accent-2",t.a2),s.setProperty("--bg-1",t.bg),s.setProperty("--text-1",t.text),s.setProperty("--card-radius",t.r+"px"),s.setProperty("--field-radius",t.fr+"px"),s.setProperty("--glass-blur",t.bl+"px"),s.setProperty("--glow",t.gl/100),(window._emptyC=pickEmptyColor(t),s.setProperty("--empty-c",window._emptyC)),s.setProperty("--accent-3",t.a3||"color-mix(in srgb,var(--accent-1) 50%,var(--accent-2))"),s.setProperty("--bg-2",t.bg2||t.bg),$("v-r").textContent=t.r,$("v-fr").textContent=t.fr,$("v-bl").textContent=t.bl,$("v-gl").textContent=t.gl,typeof updateThemeBtn==="function"&&updateThemeBtn()}
+function applyTheme(){const t={a1:$("th-a1").dataset.color,a2:$("th-a2").dataset.color,bg:$("th-bg").dataset.color,text:$("th-text").dataset.color,r:+$("th-r").value,fr:+$("th-fr").value,bl:+$("th-bl").value,gl:+$("th-gl").value,a3:(theme&&theme.a3)||null,bg2:(theme&&theme.bg2)||null,style:(theme&&theme.style)||null};theme=t,localStorage.setItem("theme",JSON.stringify(t));const s=document.documentElement.style;s.setProperty("--accent-1",t.a1),s.setProperty("--accent-2",t.a2),s.setProperty("--bg-1",t.bg),s.setProperty("--text-1",t.text),s.setProperty("--card-radius",t.r+"px"),s.setProperty("--field-radius",t.fr+"px"),s.setProperty("--glass-blur",t.bl+"px"),s.setProperty("--glow",t.gl/100),(window._emptyC=pickEmptyColor(t),s.setProperty("--empty-c",window._emptyC)),s.setProperty("--accent-3",t.a3||"color-mix(in srgb,var(--accent-1) 50%,var(--accent-2))"),s.setProperty("--bg-2",t.bg2||t.bg),(t.style?document.documentElement.setAttribute("data-style",t.style):document.documentElement.removeAttribute("data-style")),$("v-r").textContent=t.r,$("v-fr").textContent=t.fr,$("v-bl").textContent=t.bl,$("v-gl").textContent=t.gl,typeof updateThemeBtn==="function"&&updateThemeBtn()}
 function loadTheme(){$("th-a1").dataset.color=theme.a1,$("th-a1").style.background=theme.a1,$("th-a2").dataset.color=theme.a2,$("th-a2").style.background=theme.a2,$("th-bg").dataset.color=theme.bg,$("th-bg").style.background=theme.bg,$("th-text").dataset.color=theme.text,$("th-text").style.background=theme.text,$("th-r").value=theme.r,$("th-fr").value=theme.fr,$("th-bl").value=theme.bl,$("th-gl").value=theme.gl,applyTheme()}
 const THEMES=[
   {k:"midnight",n:"منتصف الليل",e:"🌙",g:"d",a1:"#818cf8",a2:"#c084fc",bg:"#0d0d1f",text:"#e8e8ff",r:24,fr:14,bl:22,gl:120},
@@ -542,23 +626,36 @@ const THEMES=[
 ];
 const THEME_GROUPS=[["mx","✨ ميكس قوي"],["d","🌑 غامقة"],["l","☀️ فاتحة"],["ml","🌈 ميكس فاتح"]];
 function themeA3(t){return t.a3||mixHexColors(t.a1,t.a2,50)}
-function isCurTheme(t){return !!theme&&t.a1===theme.a1&&t.a2===theme.a2&&t.bg===theme.bg}
-function updateThemeBtn(){const d=$("tpDots");if(!d||!theme)return;d.innerHTML=[theme.a1,theme.a2,theme.a3||mixHexColors(theme.a1,theme.a2,50)].map(c=>`<i style="background:${c}"></i>`).join("")}
-function markThemeCards(){document.querySelectorAll("#themeSheet .theme-card").forEach(b=>{const t=THEMES.find(x=>x.k===b.dataset.k);b.classList.toggle("cur",!!t&&isCurTheme(t))})}
-function openThemePalette(){
+function isCurTheme(t){return !!theme&&t.a1===theme.a1&&t.a2===theme.a2&&t.bg===theme.bg&&(t.s||null)===(theme.style||null)}
+function updateThemeBtn(){if(!theme)return;const h=[theme.a1,theme.a2,theme.a3||mixHexColors(theme.a1,theme.a2,50)].map(c=>`<i style="background:${c}"></i>`).join("");["tpDots","tpDots2"].forEach(id=>{const d=$(id);d&&(d.innerHTML=h)})}
+function markThemeCards(){document.querySelectorAll("#themeSheet .theme-card").forEach(b=>{const t=ALL_THEMES().find(x=>x.k===b.dataset.k);b.classList.toggle("cur",!!t&&isCurTheme(t))})}
+const GLASS_THEMES=[
+  {k:"gl-crystal",n:"كريستال",e:"💠",g:"gl",s:"glass",a1:"#6366f1",a2:"#22d3ee",bg:"#0f172a",text:"#f1f5f9",r:20,fr:14,bl:16,gl:100},
+  {k:"gl-aurora",n:"أورورا",e:"🌌",g:"gl",s:"glass",a1:"#22d3ee",a2:"#a78bfa",a3:"#34d399",bg:"#0b1220",text:"#f1f5f9",r:20,fr:14,bl:16,gl:100},
+  {k:"gl-violet",n:"أميثيست",e:"🔮",g:"gl",s:"glass",a1:"#8b5cf6",a2:"#f472b6",bg:"#140f26",text:"#f5f3ff",r:20,fr:14,bl:16,gl:100},
+  {k:"gl-emerald",n:"زمرد",e:"💎",g:"gl",s:"glass",a1:"#10b981",a2:"#22d3ee",bg:"#06201b",text:"#ecfdf5",r:20,fr:14,bl:16,gl:100},
+  {k:"gl-ocean",n:"محيط",e:"🌊",g:"gl",s:"glass",a1:"#0ea5e9",a2:"#6366f1",bg:"#07182b",text:"#f0f9ff",r:20,fr:14,bl:16,gl:100},
+  {k:"gl-rose",n:"روز",e:"🌹",g:"gl",s:"glass",a1:"#f43f5e",a2:"#fb923c",bg:"#1a0b14",text:"#fff1f2",r:20,fr:14,bl:16,gl:100},
+  {k:"gl-amber",n:"عنبر",e:"🔶",g:"gl",s:"glass",a1:"#f59e0b",a2:"#f472b6",bg:"#17120a",text:"#fffbeb",r:20,fr:14,bl:16,gl:100},
+  {k:"gl-slate",n:"سليت",e:"🩶",g:"gl",s:"glass",a1:"#94a3b8",a2:"#22d3ee",bg:"#111827",text:"#f9fafb",r:20,fr:14,bl:16,gl:100}
+];
+const GLASS_GROUPS=[["gl","💎 Glass Bento"]];
+const ALL_THEMES=()=>THEMES.concat(GLASS_THEMES);
+function openThemePalette(kind){
+  const glass=kind==="glass",groups=glass?GLASS_GROUPS:THEME_GROUPS,list=glass?GLASS_THEMES:THEMES;
   const sh=$("themeSheet");
-  sh.innerHTML=`<div class="sheet-handle"></div><div class="sheet-title">🎨 اختر الثيم</div><div class="theme-sheet-body">${THEME_GROUPS.map(([g,l])=>`<div class="theme-section-label">${l}</div><div class="theme-grid">${THEMES.filter(t=>t.g===g).map(t=>`<button type="button" class="theme-card${isCurTheme(t)?" cur":""}" data-k="${t.k}" onclick="applyPreset('${t.k}')"><span class="tc-dot" style="background:conic-gradient(from 200deg,${t.a1} 0 33.3%,${t.a2} 0 66.6%,${themeA3(t)} 0 100%)"><span class="tc-in" style="background:${t.bg}"></span></span><span class="tc-n">${t.e} ${t.n}</span></button>`).join("")}</div>`).join("")}</div><button class="sheet-btn cancel" onclick="closeThemePalette()">إغلاق</button>`;
+  sh.innerHTML=`<div class="sheet-handle"></div><div class="sheet-title">${glass?"💎 ثيمات زجاجية":"🎨 اختر الثيم"}</div><div class="theme-sheet-body">${groups.map(([g,l])=>`<div class="theme-section-label">${l}</div><div class="theme-grid">${list.filter(t=>t.g===g).map(t=>`<button type="button" class="theme-card${isCurTheme(t)?" cur":""}" data-k="${t.k}" onclick="applyPreset('${t.k}')"><span class="tc-dot" style="background:conic-gradient(from 200deg,${t.a1} 0 33.3%,${t.a2} 0 66.6%,${themeA3(t)} 0 100%)"><span class="tc-in" style="background:${t.bg}"></span></span><span class="tc-n">${t.e} ${t.n}</span></button>`).join("")}</div>`).join("")}</div><button class="sheet-btn cancel" onclick="closeThemePalette()">إغلاق</button>`;
   $("themeOverlay").classList.add("show");sh.classList.add("show");
 }
 function closeThemePalette(){$("themeOverlay").classList.remove("show");$("themeSheet").classList.remove("show")}
 function applyPreset(k){
-  const t=THEMES.find(x=>x.k===k);if(!t)return;
+  const t=ALL_THEMES().find(x=>x.k===k);if(!t)return;
   $("th-a1").dataset.color=t.a1,$("th-a1").style.background=t.a1;
   $("th-a2").dataset.color=t.a2,$("th-a2").style.background=t.a2;
   $("th-bg").dataset.color=t.bg,$("th-bg").style.background=t.bg;
   $("th-text").dataset.color=t.text,$("th-text").style.background=t.text;
   $("th-r").value=t.r,$("th-fr").value=t.fr,$("th-bl").value=t.bl,$("th-gl").value=t.gl;
-  theme.a3=t.a3||null;theme.bg2=t.bg2||null;
+  theme.a3=t.a3||null;theme.bg2=t.bg2||null;theme.style=t.s||null;
   applyTheme(),markThemeCards(),toast("✅ "+t.n);
 }
 function resetTheme(){theme={...DEF_TH},localStorage.setItem("theme",JSON.stringify(theme)),loadTheme(),toast("↺ تم استرجاع الافتراضي")}
@@ -590,10 +687,10 @@ function lessonCardHTML(e){
   const del=`<button type="button" class="lesson-del-btn" onclick="quickDeleteLesson(event,${e.id})">🗑️</button>`;
   let info;
   if(g){
-    const cells=t.length?t.map(s=>`<span class="g-stu">${escapeHtml(s.name)}</span>`).join(""):'<span class="g-stu" style="opacity:.5">❓</span>';
+    const cells=(t.length?t.map(s=>`<span class="g-stu">${escapeHtml(s.name)}</span>`).join(""):(e.text?"":'<span class="g-stu" style="opacity:.5">❓</span>'))+(e.text?`<span class="g-stu text-pill" style="grid-column:1/-1">✍️ ${escapeHtml(e.text)}</span>`:"");
     info=`<div class="info group-info"><div class="group-head"><span class="group-title">👥 ${escapeHtml(g.name)}</span><span class="group-count">${t.length}</span>${subj}${typeBadge}</div><div class="group-students">${cells}</div></div>`;
   }else{
-    const pills=t.length?t.map(s=>`<span class="student-pill">👤 ${escapeHtml(s.name)}</span>`).join(""):'<span class="student-pill" style="opacity:.5">❓</span>';
+    const tp=e.text?`<span class="student-pill text-pill">✍️ ${escapeHtml(e.text)}</span>`:"";const pills=(t.length?t.map(s=>`<span class="student-pill">👤 ${escapeHtml(s.name)}</span>`).join(""):(e.text?"":'<span class="student-pill" style="opacity:.5">❓</span>'))+tp;
     info=`<div class="info">${t.length>1?`<span class="group-badge">👥 ${t.length}</span>`:""}${pills}${subj}${typeBadge}</div>`;
   }
   return`<div class="lesson ${e.type}" data-lesson-id="${e.id}"${c?` style="--lc:${c}"`:""}>${timeBlock}${info}${del}</div>`;
@@ -611,9 +708,10 @@ function lessonTileHTML(e,isToday,nowMin){
   const typeIcon=isTemp?"⏳":e.type==="online"?"💻":"🏫";
   let name;
   if(g)name="👥 "+g.name;
-  else if(!t.length)name="❓";
+  else if(!t.length)name=e.text?"✍️ "+e.text:"❓";
   else name=t.slice(0,3).map(s=>s.name).join("، ")+(t.length>3?" +"+(t.length-3):"");
   const subj=n.map(x=>`<span class="badge subject">📖 ${escapeHtml(x.name)}</span>`).join("");
+  if(e.text&&(g||t.length))name+=" ✍️ "+e.text;
   const cnt=(t.length>1||g)?`<span class="group-badge">👥 ${t.length}</span>`:"";
   const isNow=isToday&&nowMin>=toMin(e.start)&&nowMin<toMin(e.end);
   return`<div class="lesson-tile ${e.type}${isNow?" now":""}" data-lesson-id="${e.id}"${c?` style="--lc:${c}"`:""}><div class="tile-time"><span>${fmt12(e.start)}</span><span class="tile-type">${typeIcon}</span></div><div class="tile-name">${escapeHtml(name)}</div><div class="tile-meta">${cnt}${subj}</div></div>`;
@@ -637,12 +735,12 @@ function renderTimeline(){
     const hMin=60*h,hEnd=Math.min(60*(h+1),eMin);
     const inHour=dayLessons.filter(e=>{const s=toMin(e.start),en=toMin(e.end);return s<hEnd&&en>hMin});
     const isCur=isToday&&curH===h;
-    let inner=inHour.length?inHour.map(e=>toMin(e.start)>=hMin&&toMin(e.start)<hEnd?lessonCardHTML(e):`<div class="lesson-cont${e.type==="empty"?" empty":""}"><span class="cont-icon">⬇️</span><span>مستمر: ${escapeHtml(e.type==="empty"?"🕳️ فراغ":(getLessonStudents(e).map(e=>e.name).join("، ")||"طالب"))} — حتى ${fmt12(e.end)}</span></div>`).join(""):'<div class="empty-hour"><span class="empty-icon">💤</span> فارغ</div>';
+    let inner=inHour.length?inHour.map(e=>toMin(e.start)>=hMin&&toMin(e.start)<hEnd?lessonCardHTML(e):`<div class="lesson-cont${e.type==="empty"?" empty":""}"><span class="cont-icon">⬇️</span><span>مستمر: ${escapeHtml(e.type==="empty"?"🕳️ فراغ":(getLessonStudents(e).map(e=>e.name).join("، ")||e.text||"طالب"))} — حتى ${fmt12(e.end)}</span></div>`).join(""):'<div class="empty-hour"><span class="empty-icon">💤</span> فارغ</div>';
     html+=`<div class="hour-row ${isCur?"current":""}" data-hour="${h}"><div class="hour-time"><div class="hour-start">${fmtHour(h)}</div><div class="hour-end">${fmtHour(h+1)}</div></div><div class="hour-content">${inner}</div></div>`;
   }
   t.innerHTML=html;
   // ── سكرول للساعة الحالية ──
-  if(_firstLoad||isToday){
+  if(_firstLoad){
     setTimeout(()=>{
       const el=t.querySelector(".hour-row.current");
       if(el)el.scrollIntoView({behavior:"smooth",block:"center"});
@@ -690,7 +788,7 @@ function renderMap(){
       const g=getLessonGroup(l);const col=isTemp?"#ef4444":(g?g.color:(subs.length?getSubjectColor(subs[0].id):"#6366f1"));
       const bg=hexToRgba(col,isTemp?.12:.18),bc=hexToRgba(col,isTemp?.7:.55);
       const icon=isTemp?"⏳":l.type==="online"?"💻":"🏫";
-      let nm=sts.length===0?'<div class="map-lesson-name">❓</div>':sts.length===1?`<div class="map-lesson-name">${icon} ${escapeHtml(sts[0].name)}</div>`:h>100?`<div class="map-lesson-group">👥 ${sts.length}</div>`+sts.slice(0,3).map(s=>`<div class="map-lesson-name" style="font-size:10px">${escapeHtml(s.name)}</div>`).join("")+(sts.length>3?`<div class="map-lesson-name" style="font-size:9px;opacity:.7">+${sts.length-3}</div>`:""): `<div class="map-lesson-name">${icon} ${escapeHtml(sts[0].name)} +${sts.length-1}</div>`;
+      let nm=sts.length===0?`<div class="map-lesson-name">${l.text?icon+" "+escapeHtml(l.text):"❓"}</div>`:sts.length===1?`<div class="map-lesson-name">${icon} ${escapeHtml(sts[0].name)}</div>`:h>100?`<div class="map-lesson-group">👥 ${sts.length}</div>`+sts.slice(0,3).map(s=>`<div class="map-lesson-name" style="font-size:10px">${escapeHtml(s.name)}</div>`).join("")+(sts.length>3?`<div class="map-lesson-name" style="font-size:9px;opacity:.7">+${sts.length-3}</div>`:""): `<div class="map-lesson-name">${icon} ${escapeHtml(sts[0].name)} +${sts.length-1}</div>`;
       if(g){nm=`<div class="map-lesson-name">👥 ${escapeHtml(g.name)}</div>`+(h>44?`<div class="map-students">${sts.map(s=>`<span>${escapeHtml(s.name)}</span>`).join("")}</div>`:"");}
       const subjLine=h>55&&subs.length&&!isTemp?`<div class="map-lesson-subj">📖 ${escapeHtml(subs.map(s=>s.name).join("، "))}</div>`:isTemp&&h>55?'<div class="map-lesson-subj" style="color:#fca5a5">⏳ مؤقتة</div>':"";
       const timeLine=h>80?`<div class="map-lesson-time">${fmt12(l.start)} - ${fmt12(l.end)}</div>`:"";
@@ -715,17 +813,17 @@ function confirmLesson(id,newType){const l=lessons.find(l=>l.id===id);if(!l)retu
 // ===== CONTEXT SHEET =====
 function openContextSheet(info){const sh=$("sheet"),ov=$("sheetOverlay");let html="";
   if(info.lessonId&&(lessons.find(l=>l.id===info.lessonId)||{}).type==="empty"){const l=lessons.find(l=>l.id===info.lessonId);html=`<div class="sheet-handle"></div><div class="sheet-title">🕳️ فراغ</div><div class="sheet-info"><div class="sheet-row"><span class="ico">📅</span><span class="txt">${DAYS[l.day]}</span></div><div class="sheet-row"><span class="ico">🕐</span><span class="txt">${fmt12(l.start)} — ${fmt12(l.end)}</span></div></div><div class="sheet-actions"><button class="sheet-btn primary" onclick="openEditSheet(${l.id})"><span>✏️</span> تحويله لحصة / تعديل</button><button class="sheet-btn danger" onclick="sheetDeleteLesson(${l.id})"><span>🗑️</span> حذف الفراغ</button></div><button class="sheet-btn cancel" onclick="closeSheet()">إلغاء</button>`;}
-  else if(info.lessonId){const l=lessons.find(l=>l.id===info.lessonId);if(!l)return;const sts=getLessonStudents(l),subs=getLessonSubjects(l),isTemp=l.type==="temp";html=`<div class="sheet-handle"></div><div class="sheet-title">${isTemp?"⏳ حصة مؤقتة":"📚 تفاصيل الحصة"}</div><div class="sheet-info"><div class="sheet-row"><span class="ico">👥</span><span class="txt">${escapeHtml(sts.map(s=>s.name).join("، ")||"—")}</span></div><div class="sheet-row"><span class="ico">📖</span><span class="txt">${escapeHtml(subs.map(s=>s.name).join("، ")||"—")}</span></div><div class="sheet-row"><span class="ico">📅</span><span class="txt">${DAYS[l.day]}</span></div><div class="sheet-row"><span class="ico">🕐</span><span class="txt">${fmt12(l.start)} — ${fmt12(l.end)}</span></div></div><div class="sheet-actions">${isTemp?`<button class="sheet-btn success" onclick="confirmLesson(${l.id},'offline')"><span>🏫</span> تأكيد كحضوري</button><button class="sheet-btn success" onclick="confirmLesson(${l.id},'online')"><span>💻</span> تأكيد كأونلاين</button>`:`<button class="sheet-btn primary" onclick="sheetAddAfter(${l.id})"><span>➕</span> إضافة حصة بعدها</button>`}<button class="sheet-btn primary" onclick="openEditSheet(${l.id})"><span>✏️</span> تعديل الحصة</button><button class="sheet-btn danger" onclick="sheetDeleteLesson(${l.id})"><span>🗑️</span> حذف الحصة</button></div><button class="sheet-btn cancel" onclick="closeSheet()">إلغاء</button>`;}
+  else if(info.lessonId){const l=lessons.find(l=>l.id===info.lessonId);if(!l)return;const sts=getLessonStudents(l),subs=getLessonSubjects(l),isTemp=l.type==="temp";html=`<div class="sheet-handle"></div><div class="sheet-title">${isTemp?"⏳ حصة مؤقتة":"📚 تفاصيل الحصة"}</div><div class="sheet-info"><div class="sheet-row"><span class="ico">👥</span><span class="txt">${escapeHtml([sts.map(s=>s.name).join("، "),l.text?"✍️ "+l.text:""].filter(Boolean).join(" — ")||"—")}</span></div><div class="sheet-row"><span class="ico">📖</span><span class="txt">${escapeHtml(subs.map(s=>s.name).join("، ")||"—")}</span></div><div class="sheet-row"><span class="ico">📅</span><span class="txt">${DAYS[l.day]}</span></div><div class="sheet-row"><span class="ico">🕐</span><span class="txt">${fmt12(l.start)} — ${fmt12(l.end)}</span></div></div><div class="sheet-actions">${isTemp?`<button class="sheet-btn success" onclick="confirmLesson(${l.id},'offline')"><span>🏫</span> تأكيد كحضوري</button><button class="sheet-btn success" onclick="confirmLesson(${l.id},'online')"><span>💻</span> تأكيد كأونلاين</button>`:`<button class="sheet-btn primary" onclick="sheetAddAfter(${l.id})"><span>➕</span> إضافة حصة بعدها</button>`}<button class="sheet-btn primary" onclick="openEditSheet(${l.id})"><span>✏️</span> تعديل الحصة</button><button class="sheet-btn danger" onclick="sheetDeleteLesson(${l.id})"><span>🗑️</span> حذف الحصة</button></div><button class="sheet-btn cancel" onclick="closeSheet()">إلغاء</button>`;}
   else if(info.colEl){if(info.isMap){const r=info.colEl.getBoundingClientRect();let m=(info.y-r.top)/MAP_PX_PER_MIN+MAP_START_MIN;m=Math.max(MAP_START_MIN,Math.min(m,toMin(getDayHours(info.dayIdx).end)-30));const t=toTime(30*Math.round(m/30));html=`<div class="sheet-handle"></div><div class="sheet-title">📍 إضافة سريعة</div><div class="sheet-info"><div class="sheet-row"><span class="ico">📅</span><span class="txt">${DAYS[info.dayIdx]}</span></div><div class="sheet-row"><span class="ico">🕐</span><span class="txt">حوالي ${fmt12(t)}</span></div></div><div class="sheet-actions"><button class="sheet-btn primary" onclick="sheetAddHere(${info.dayIdx},'${t}')"><span>➕</span> إضافة حصة هنا</button><button class="sheet-btn success" onclick="sheetAddEmpty(${info.dayIdx},'${t}','${toTime(Math.min(toMin(t)+60,toMin(getDayHours(info.dayIdx).end)))}')"><span>🕳️</span> تحديد كفراغ</button></div><button class="sheet-btn cancel" onclick="closeSheet()">إلغاء</button>`;}
   else{const t=String(info.hour).padStart(2,"0")+":00",n=toTime(Math.min(60*info.hour+60,toMin(getDayHours(selectedDay).end)));html=`<div class="sheet-handle"></div><div class="sheet-title">📍 إضافة سريعة</div><div class="sheet-info"><div class="sheet-row"><span class="ico">📅</span><span class="txt">${DAYS[selectedDay]}</span></div><div class="sheet-row"><span class="ico">🕐</span><span class="txt">${fmt12(t)} — ${fmt12(n)}</span></div></div><div class="sheet-actions"><button class="sheet-btn primary" onclick="sheetAddAtHour(${selectedDay},'${t}','${n}')"><span>➕</span> إضافة حصة هنا</button><button class="sheet-btn success" onclick="sheetAddEmpty(${selectedDay},'${t}','${n}')"><span>🕳️</span> تحديد كفراغ</button></div><button class="sheet-btn cancel" onclick="closeSheet()">إلغاء</button>`;}}
   sh.innerHTML=html,sh.classList.add("show"),ov.classList.add("show");
 }
 function closeSheet(){$("sheet").classList.remove("show"),$("sheetOverlay").classList.remove("show")}
 function sheetDeleteLesson(e){closeSheet(),setTimeout(()=>showConfirm("تأكيد حذف الحصة؟",()=>{lessons=lessons.filter(t=>t.id!==e),save(),render(),$("page-map").classList.contains("active")&&renderMap(),toast("🗑️ تم الحذف")}),250)}
-function sheetAddHere(day,t){closeSheet(),setTimeout(()=>{showPage("page-home"),showFab(),selectedDay=day,renderDays(),render(),window.scrollTo({top:0,behavior:"smooth"}),setTimeout(()=>{openFormWithTime(day,t,toTime(Math.min(toMin(t)+60,toMin(getDayHours(day).end))))},300)},250)}
+function sheetAddHere(day,t){closeSheet(),setTimeout(()=>{showPage("page-home"),showFab(),selectedDay=day,renderDays(),render(),window.scrollTo(0,0),setTimeout(()=>{openFormWithTime(day,t,toTime(Math.min(toMin(t)+60,toMin(getDayHours(day).end))))},300)},250)}
 function sheetAddEmpty(day,t,n){if(toMin(t)>=toMin(n))return toast("⚠️ الوقت غير صالح");closeSheet();lessons.push({id:uid(),studentIds:[],day,start:t,end:n,type:"empty",groupId:null});save();selectedDay=day;renderDays();render();$("page-map").classList.contains("active")&&renderMap();toast("⬜ تم تحديد الفراغ")}
 function sheetAddAtHour(day,t,n){closeSheet(),setTimeout(()=>{selectedDay=day,renderDays(),render(),openFormWithTime(day,t,n)},250)}
-function sheetAddAfter(id){const l=lessons.find(l=>l.id===id);if(!l)return;closeSheet(),setTimeout(()=>{showPage("page-home"),showFab(),selectedDay=l.day,renderDays(),render(),window.scrollTo({top:0,behavior:"smooth"}),setTimeout(()=>{$("addForm").classList.add("show"),$("fab").classList.add("open"),$("inpDay").value=l.day,$("inpStart").value=l.end,$("inpEnd").value=toTime(Math.min(toMin(l.end)+60,toMin(getDayHours(l.day).end)));selectedStudentIds=new Set(l.studentIds||[]),$("inpGroup").value=(l.groupId&&getGroup(l.groupId))?String(l.groupId):"",renderStudentPicker(),setTimeout(()=>$("addForm").scrollIntoView({behavior:"smooth",block:"start"}),150)},300)},250)}
+function sheetAddAfter(id){const l=lessons.find(l=>l.id===id);if(!l)return;closeSheet(),setTimeout(()=>{showPage("page-home"),showFab(),selectedDay=l.day,renderDays(),render(),window.scrollTo(0,0),setTimeout(()=>{$("addForm").classList.add("show"),$("fab").classList.add("open"),$("inpDay").value=l.day,$("inpStart").value=l.end,$("inpEnd").value=toTime(Math.min(toMin(l.end)+60,toMin(getDayHours(l.day).end)));selectedStudentIds=new Set(l.studentIds||[]),$("inpGroup").value=(l.groupId&&getGroup(l.groupId))?String(l.groupId):"",renderStudentPicker(),setTimeout(()=>$("addForm").scrollIntoView({behavior:"smooth",block:"start"}),150)},300)},250)}
 function openFormWithTime(day,st,en){$("addForm").classList.add("show"),$("fab").classList.add("open"),$("inpDay").value=day,$("inpStart").value=st,$("inpEnd").value=en,renderStudentPicker(),setTimeout(()=>$("addForm").scrollIntoView({behavior:"smooth",block:"start"}),150)}
 // ===== NAVIGATION =====
 function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active")),$(id).classList.add("active")}
@@ -744,23 +842,23 @@ function toggleForm(){const e=$("addForm"),t=$("fab");e.classList.toggle("show")
 }
 function showFab(){$("fab").style.display="grid"}
 function hideFab(){$("fab").style.display="none"}
-function openSettings(){showPage("page-settings"),hideFab(),renderSettings(),renderStudentDropdownSettings(),renderDayHoursCard(),window.scrollTo({top:0,behavior:"smooth"})}
-function closeSettings(){showPage("page-home"),showFab(),render(),window.scrollTo({top:0,behavior:"smooth"})}
-function openMap(){showPage("page-map"),hideFab(),renderMap(),window.scrollTo({top:0,behavior:"smooth"})}
-function closeMap(){showPage("page-settings"),hideFab(),window.scrollTo({top:0,behavior:"smooth"})}
+function openSettings(){showPage("page-settings"),hideFab(),renderSettings(),renderStudentDropdownSettings(),renderDayHoursCard(),window.scrollTo(0,0)}
+function closeSettings(){showPage("page-home"),showFab(),render(),window.scrollTo(0,0)}
+function openMap(){showPage("page-map"),hideFab(),renderMap(),window.scrollTo(0,0)}
+function closeMap(){showPage("page-settings"),hideFab(),window.scrollTo(0,0)}
 function clearAll(){showConfirm("متأكد؟ هيتحذف كل الحصص فقط!",()=>{lessons=[],save(),render(),toast("🗑️ تم حذف كل الحصص")})}
 // ===== FAB DRAG =====
 function initDraggableFab(){const fab=$("fab"),saved=localStorage.getItem("fabPos");if(saved)try{const{x,y}=JSON.parse(saved),mxX=window.innerWidth-60,mxY=window.innerHeight-60;fab.style.left=Math.max(8,Math.min(x,mxX))+"px",fab.style.top=Math.max(8,Math.min(y,mxY))+"px"}catch(e){}else fab.style.left="20px",fab.style.top=window.innerHeight-100+"px";let dn=false,mv=false,ox=0,oy=0,sx=0,sy=0,pid=null;
   fab.addEventListener("pointerdown",e=>{e.preventDefault();const r=fab.getBoundingClientRect();ox=r.left,oy=r.top,sx=e.clientX,sy=e.clientY,dn=true,mv=false,pid=e.pointerId;try{fab.setPointerCapture(pid)}catch(e){}fab.classList.add("dragging")});
   fab.addEventListener("pointermove",e=>{if(!dn||e.pointerId!==pid)return;const dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)>5||Math.abs(dy)>5)mv=true;let nx=ox+dx,ny=oy+dy;nx=Math.max(8,Math.min(nx,window.innerWidth-60)),ny=Math.max(8,Math.min(ny,window.innerHeight-60)),fab.style.left=nx+"px",fab.style.top=ny+"px"});
-  const up=e=>{if(!dn||e.pointerId!==pid)return;dn=false,fab.classList.remove("dragging");if(mv){const r=fab.getBoundingClientRect();localStorage.setItem("fabPos",JSON.stringify({x:r.left,y:r.top})),navigator.vibrate&&navigator.vibrate(15)}else toggleForm();pid=null};
+  const up=e=>{if(!dn||e.pointerId!==pid)return;dn=false,fab.classList.remove("dragging");if(mv){const r=fab.getBoundingClientRect();localStorage.setItem("fabPos",JSON.stringify({x:r.left,y:r.top})),navigator.vibrate&&navigator.vibrate(15)}else goHome();pid=null};
   fab.addEventListener("pointerup",up),fab.addEventListener("pointercancel",up);
 }
 window.addEventListener("resize",()=>{const fab=$("fab");if(!fab)return;const r=fab.getBoundingClientRect(),nx=Math.max(8,Math.min(r.left,window.innerWidth-60)),ny=Math.max(8,Math.min(r.top,window.innerHeight-60));fab.style.left=nx+"px",fab.style.top=ny+"px"});
 // ===== REPORT =====
 let repSelectedStudentIds=new Set;
-function openReport(){showPage("page-report"),hideFab(),$("repTeacherName").value=localStorage.getItem("teacherName")||"",repSelectedStudentIds=new Set,onReportTypeChange(),window.scrollTo({top:0,behavior:"smooth"})}
-function closeReport(){showPage("page-settings"),hideFab(),window.scrollTo({top:0,behavior:"smooth"})}
+function openReport(){showPage("page-report"),hideFab(),$("repTeacherName").value=localStorage.getItem("teacherName")||"",repSelectedStudentIds=new Set,onReportTypeChange(),window.scrollTo(0,0)}
+function closeReport(){showPage("page-settings"),hideFab(),window.scrollTo(0,0)}
 function onReportTypeChange(){const s="students"===$("repType").value;$("repStudentWrap").style.display=s?"block":"none",$("repSubjectWrap").style.display=s?"none":"block",renderReportStudentPicker(),renderReportSubjectSelect(),$("reportCardWrap").innerHTML="",$("repDownloadBtn").style.display="none"}
 function renderReportStudentPicker(){const e=$("repStudentPicker");if(!e)return;e.innerHTML=students.length?students.map(t=>{const n=getSubject(t.subjectId),s=repSelectedStudentIds.has(t.id);return`<button type="button" class="student-chip ${s?"selected":""}" onclick="toggleRepStudent(${t.id})"><span class="check">${s?"✓":""}</span><span>${escapeHtml(t.name)}</span><span style="opacity:.65;font-size:10px">${n?"• "+escapeHtml(n.name):""}</span></button>`}).join(""):'<div style="color:var(--text-3);font-size:12px;padding:8px;width:100%;text-align:center">— أضف طلاب أولاً —</div>'}
 function toggleRepStudent(e){repSelectedStudentIds.has(e)?repSelectedStudentIds.delete(e):repSelectedStudentIds.add(e),renderReportStudentPicker()}
@@ -860,7 +958,7 @@ function toggleEditStudent(id){_editStudentIds.has(id)?_editStudentIds.delete(id
 function saveEditLesson(){
   const l=lessons.find(x=>x.id===_editId);if(!l)return closeEditSheet();
   const ids=Array.from(_editStudentIds),day=parseInt($("editDay").value),st=$("editStart").value,en=$("editEnd").value,type=$("editType").value;
-  if(!ids.length&&type!=="empty")return toast("⚠️ اختر طالب واحد على الأقل");
+  if(!ids.length&&!l.text&&type!=="empty")return toast("⚠️ اختر طالب واحد على الأقل");
   if(!st||!en||toMin(st)>=toMin(en))return toast("⚠️ وقت البداية لازم قبل النهاية");
   Object.assign(l,{studentIds:type==="empty"?[]:ids,day,start:st,end:en,type,groupId:type==="empty"?null:(parseInt($("editGroup").value)||null)});
   save();selectedDay=day;renderDays();render();
@@ -1197,5 +1295,108 @@ const FIREBASE_CONFIG={
 })();
 </script>
 <script>if("serviceWorker"in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));</script>
+<script>
+/* ===== نقرتين على الحصة = كتابة نص حر ===== */
+let _txtId=null,_txtHour=null,_tapLast={k:null,t:0};
+function openTextSheet(id,hour){
+  let l=null;
+  if(id!=null){l=lessons.find(x=>x.id===id);if(!l)return}
+  _txtId=id;_txtHour=hour;
+  const cur=(l&&l.text)?l.text:"";
+  let when;
+  if(l)when=DAYS[l.day]+" • "+fmt12(l.start)+" — "+fmt12(l.end);
+  else{const st=String(hour).padStart(2,"0")+":00",en=toTime(Math.min(60*hour+60,toMin(getDayHours(selectedDay).end)));when=DAYS[selectedDay]+" • "+fmt12(st)+" — "+fmt12(en)}
+  const title=l?(l.type==="empty"?"🕳️ فراغ":"📚 حصة"):"➕ حصة جديدة";
+  $("editSheet").innerHTML=`<div class="sheet-handle"></div><div class="sheet-title">✍️ ${title}</div><div class="edit-sheet-body">
+    <div class="edit-label"><span>🕐 ${when}</span></div>
+    <div class="edit-label"><span>اكتب أي نص (اسم، ملاحظة، أي حاجة)</span></div>
+    <input type="text" id="lessonTextInp" maxlength="80" placeholder="مثال: اجتماع / أحمد / مراجعة" value="${escapeHtml(cur)}" style="margin-top:6px" onkeydown="if(event.key==='Enter')saveLessonText()">
+  </div>
+  <div class="sheet-actions" style="margin-top:14px"><button class="sheet-btn success" onclick="saveLessonText()"><span>💾</span> حفظ</button>${(l&&l.text)?'<button class="sheet-btn danger" onclick="clearLessonText()"><span>🧹</span> مسح النص</button>':""}${l?`<button class="sheet-btn primary" onclick="openEditSheet(${l.id})"><span>⚙️</span> تعديل كامل للحصة</button>`:""}</div>
+  <button class="sheet-btn cancel" onclick="closeEditSheet()">إلغاء</button>`;
+  $("editOverlay").classList.add("show");$("editSheet").classList.add("show");
+  setTimeout(()=>{const i=$("lessonTextInp");i&&i.focus()},350);
+}
+function _afterTextChange(){save();render();$("page-map").classList.contains("active")&&renderMap();closeEditSheet()}
+function saveLessonText(){
+  const v=$("lessonTextInp").value.trim();
+  if(_txtId!=null){
+    const l=lessons.find(x=>x.id===_txtId);if(!l)return closeEditSheet();
+    if(!v)return clearLessonText();
+    l.text=v;if(l.type==="empty")l.type="offline";
+  }else{
+    if(!v)return toast("⚠️ اكتب نص الأول");
+    const st=String(_txtHour).padStart(2,"0")+":00",en=toTime(Math.min(60*_txtHour+60,toMin(getDayHours(selectedDay).end)));
+    if(toMin(st)>=toMin(en))return toast("⚠️ الوقت غير صالح");
+    lessons.push({id:uid(),studentIds:[],day:selectedDay,start:st,end:en,type:"offline",groupId:null,text:v});
+  }
+  _afterTextChange();toast("✅ تم الحفظ");
+}
+function clearLessonText(){
+  const l=lessons.find(x=>x.id===_txtId);if(!l)return closeEditSheet();
+  delete l.text;
+  if(!(l.studentIds||[]).length&&l.type!=="empty"){lessons=lessons.filter(x=>x.id!==l.id);_afterTextChange();return toast("🗑️ تم مسح الحصة")}
+  _afterTextChange();toast("🧹 تم مسح النص");
+}
+(function(){
+  const lst=document.getElementById("lessonsList");if(!lst)return;
+  lst.addEventListener("click",ev=>{
+    if(ev.target.closest("button"))return;
+    const sh=document.getElementById("sheet");if(sh&&sh.classList.contains("show"))return;
+    let k=null;const les=ev.target.closest("[data-lesson-id]");
+    if(les)k="L"+les.dataset.lessonId;
+    else{const eh=ev.target.closest(".empty-hour");if(eh){const row=eh.closest(".hour-row");if(row)k="H"+row.dataset.hour}}
+    if(!k){_tapLast.k=null;return}
+    const n=Date.now();
+    if(_tapLast.k===k&&n-_tapLast.t<400){_tapLast.k=null;k[0]==="L"?openTextSheet(parseInt(k.slice(1)),null):openTextSheet(null,parseInt(k.slice(1)))}
+    else{_tapLast.k=k;_tapLast.t=n}
+  });
+})();
+/* ===== إيقاف النبض أثناء السكرول ===== */
+(function(){let to=null,on=false;const h=document.documentElement;
+window.addEventListener("scroll",()=>{if(!on){h.classList.add("is-scrolling");on=true}clearTimeout(to);to=setTimeout(()=>{h.classList.remove("is-scrolling");on=false},180)},{passive:true,capture:true});})();
+/* ===== أكورديون الإعدادات ===== */
+(function(){
+  const pg=document.getElementById("page-settings");if(!pg)return;
+  const heads=[];
+  Array.from(pg.children).forEach(lb=>{
+    if(!lb.classList.contains("section-label"))return;
+    const card=lb.nextElementSibling;if(!card||!card.classList.contains("card"))return;
+    const body=document.createElement("div"),inner=document.createElement("div");
+    body.className="acc-body";inner.className="acc-inner";
+    card.parentNode.insertBefore(body,card);body.appendChild(inner);inner.appendChild(card);
+    lb.classList.add("acc-head");lb.setAttribute("role","button");lb.tabIndex=0;lb._body=body;heads.push(lb);
+    const toggle=()=>{
+      const open=!lb.classList.contains("open");
+      heads.forEach(h=>{h.classList.remove("open");h._body.classList.remove("open")});
+      if(open){lb.classList.add("open");body.classList.add("open");setTimeout(()=>lb.scrollIntoView({behavior:"smooth",block:"start"}),330)}
+    };
+    lb.addEventListener("click",toggle);
+    lb.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle()}});
+  });
+})();
+</script>
+<script>
+/* ===== زرار حفظ الإعدادات (تأكيد) ===== */
+function saveAllSettings(){
+  try{
+    save();
+    localStorage.setItem("settings",JSON.stringify(settings));
+    localStorage.setItem("theme",JSON.stringify(theme));
+    localStorage.setItem("welcome",JSON.stringify(welcomeCfg));
+    const tn=localStorage.getItem("teacherName");if(tn!==null)localStorage.setItem("teacherName",tn);
+    render();toast("✅ تم حفظ كل الإعدادات");
+  }catch(e){toast("⚠️ تعذر الحفظ")}
+}
+</script>
+<script>
+/* ===== زرار الرئيسية: يظهر في كل الصفحات ويرجّعك للواجهة ===== */
+function hideFab(){}
+function goHome(){
+  try{closeSheet();closeEditSheet();closeFreeSlots();closeThemePalette();closeColorPicker();closeConfirm()}catch(e){}
+  const f=$("addForm");f&&f.classList.remove("show");
+  showPage("page-home");showFab();render();window.scrollTo(0,0);
+}
+</script>
 </body>
 </html>
